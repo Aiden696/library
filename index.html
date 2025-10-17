@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <title>Моя библиотека</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="./styles/index.css">
+    </head>
+    <body>
+        <header id="header" class="header">
+
+            <section class="choiceContainer">
+                <label class="choiceItem">
+                    <input type="radio" name="choice" value="option1" class="choiceInput" checked>
+                    <span class="choiceText">Все книги</span>
+                </label>
+                <label class="choiceItem">
+                    <input type="radio" name="choice" value="option2" class="choiceInput">
+                    <span class="choiceText">Печатные</span>
+                </label>
+                <label class="choiceItem">
+                    <input type="radio" name="choice" value="option3" class="choiceInput">
+                    <span class="choiceText">Электронные</span>
+                </label>
+            </section>
+
+            <section class="choiceContainer2"> <!--кастомизированный select для жанра и автора-->
+                <div class="choiceItem">
+                    <div class="select-header">Выбрать жанр</div>
+                    <div class="select-list">
+                        <div class="select-option">Фантастика</div>
+                        <div class="select-option">Детектив</div>
+                    </div>
+                </div>
+
+                 <div class="choiceItem">
+                    <div class="select-header">Выбрать автора</div>
+                    <div class="select-list">
+                        <div class="select-option">Маяковский</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="choiceContainer3">
+                <input class="enterBook" placeholder="найти книгу...">
+                <button class="addBook">+ Добавить книгу</button>
+            </section>
+
+        </header>
+        <main id="cardsOfBooks" class="cardsOfBooks"></main>
+        <script src="./scripts/index.js"></script>
+    </body>
+</html>
