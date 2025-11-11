@@ -11,26 +11,16 @@ async function addAllBooks() { //добавить книги из json в localS
 }
 addAllBooks()
 
-function getAllBooks() { //взять книги из localStorage 
+export default function getAllBooks() { //взять книги из localStorage 
     try {
         let localStorageBooks = localStorage.getItem('allBooks')
-        return JSON.parse(localStorageBooks)
+        return JSON.parse(localStorageBooks);
     } catch {
         console.log('error')
     }
 }
 
-function displayBooks() {
-    let sectionOfBooks = document.getElementById('cards')
-    let books = getAllBooks();
 
-    let showBooks = books.map(book => 
-        book.title
-    )
-    sectionOfBooks.innerHTML = showBooks;
-}
-
-displayBooks()
 
 //localStorage.clear()
 

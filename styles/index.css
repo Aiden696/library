@@ -116,3 +116,16 @@ body {
     background-color: rgb(197, 197, 255);
     flex: 1;
 }
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+    margin: 5px;
+}
+
+.cardOfBook {
+    background-color: rgb(239, 244, 252);
+    border-radius: 15px;
+    padding: 5px;
+}
