@@ -1,5 +1,4 @@
 import getAllBooks from "./db.js";
-let books = getAllBooks();
 
 //кастомизация select
 document.addEventListener('click', (e) => {
@@ -25,16 +24,24 @@ document.addEventListener('click', (e) => {
 });
 
 function displayBooks() {
+    let books = getAllBooks();
     let sectionOfBooks = document.getElementById('cards');
-    books.map(book => {
+
+    books.forEach(book => {
         let card = document.createElement('div');
         card.className = 'cardOfBook';
-        
+
         card.innerHTML = `
-            <h3 class="bookTitle">${book.title}</h3>
-            ${`<p class="bookAuthor">Автор: ${book.author}</p>`}
-            ${`<p class="bookGenre">Жанр: ${book.genre_id}</p>`}
-            ${`<p class="bookDescription">Описание: ${book.description}</p>`}
+            <div class="bookPicture">
+                <img src="${book.cover}" alt="${book.title}" class="bookCover">
+            </div>
+
+            <div class="bookContent">
+                <h3 class="bookTitle">${book.title}</h3>
+                ${`<p class="bookAuthor">Автор: ${book.author}</p>`}
+                ${`<p class="bookGenre">Жанр: ${book.genre_id}</p>`}
+                ${`<p class="bookDescription">Описание: ${book.description}</p>`}
+            </div>
         `;
         sectionOfBooks.appendChild(card);
     });

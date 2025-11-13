@@ -1,5 +1,5 @@
 async function addAllBooks() { //добавить книги из json в localStorage
-    if (localStorage.length === 0) {
+    if (!localStorage.getItem('allBooks')) {
         try {
             let response = await fetch ('books.json');
             let data = await response.json()
@@ -9,18 +9,20 @@ async function addAllBooks() { //добавить книги из json в localS
         }
     }
 }
-addAllBooks()
 
 export default function getAllBooks() { //взять книги из localStorage 
     try {
         let localStorageBooks = localStorage.getItem('allBooks')
-        return JSON.parse(localStorageBooks);
+        if (localStorageBooks) {
+            return JSON.parse(localStorageBooks)
+        } else {
+            return []; //что бы не ломался forEach
+        }
     } catch {
         console.log('error')
     }
 }
 
-
+addAllBooks()
 
 //localStorage.clear()
-
