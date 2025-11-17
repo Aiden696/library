@@ -51,9 +51,8 @@ body {
     gap: 7px;
 }
 
-/* кастомизация select */
-
-.select-header {
+/*кастомизация select*/
+.selectHeader {
     background: rgb(239, 244, 252);
     border: 3px solid rgb(197, 197, 255);
     padding: 7px;
@@ -61,33 +60,34 @@ body {
     cursor: pointer;
 }
 
-.select-list {
+.selectList {
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
+    height: 230px;
+    overflow-y: auto;
     background: white;
     border: 1px solid #ccc;
     display: none;
 }
 
-.select-list.show {
+.selectList.show {
     display: block;
     border-radius: 20px;
 }
 
-.select-option {
+.selectOption {
     padding: 10px;
     cursor: pointer;
     border-radius: 15px;
 }
 
-.select-option:hover {
+.selectOption:hover {
     background: rgb(197, 197, 255);
 }
 
-/* инпут и кнопка */
-
+/*инпут и кнопка*/
 .choiceContainer3 {
     display: flex;
     gap: 7px;
@@ -119,7 +119,7 @@ body {
 
 .cards {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     gap: 5px;
     margin: 5px;
 }
@@ -129,20 +129,32 @@ body {
     border-radius: 15px;
 }
 
+/*скрыть карточки*/
+.cardOfBook.hidden {
+    display: none /*полностью убрать из потока*/
+}
+
+/*показать карточки*/
+.cardOfBook.visible {
+    display: block;
+}
+
 .bookPicture {
-  overflow: hidden;  /* Обрезает выходящие за границы элементы */
+  overflow: hidden; /*обрезает выходящие за границы элементы*/
   width: 100%;
-  height: 400px;
+  height: 340px;
   border-radius: 15px;
 }
 
 .bookCover {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Заполняет область без искажений пропорций */
+  object-fit: cover; /*заполняет область без искажений пропорций*/
   object-position: center;
 }
 
 .bookContent {
     padding: 5px;
+    overflow-y: auto;
+    height: 200px;
 }
