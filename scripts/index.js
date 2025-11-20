@@ -55,6 +55,9 @@ async function displayBooks() {
         let card = document.createElement('div');
         card.className = 'cardOfBook';
 
+        card.dataset.author = book.author; //с помощью dataset каждой карточке приписывает автора
+        card.dataset.genre = book.genre_id;
+
         card.innerHTML = `
             <div class="bookPicture">
                 <img src="${book.cover}" alt="${book.title}" class="bookCover">
@@ -69,17 +72,21 @@ async function displayBooks() {
         `;
         sectionOfBooks.appendChild(card);
 
+        let allCards = document.querySelectorAll('.cardOfBook'); //находит все карточки
+
         let selectGenres = document.querySelectorAll('#selectGenre') // сравнение жанра из списка и жанра из карточки
         selectGenres.forEach(selectGenre => {
             selectGenre.addEventListener('click', function() {
-                if (selectGenre.textContent === genres[book.genre_id]) {
+                let selectGenres = this.textContent;
+                allCards.forEach(card => {
+                    if (genres[card.dataset.genre] === selectGenres) {
                     showCard(card)
-                } else if (selectGenre.textContent != genres[book.genre_id]) {
+                } else {
                     hideCard(card)
                 }
+                })
             })
         })
-        
         
         // ЗДЕСЬ АВТОРЫ ЗДЕСЬ АВТОРЫ ЗДЕСЬ АВТОРЫ ЗДЕСЬ АВТОРЫ ЗДЕСЬ АВТОРЫ ЗДЕСЬ АВТОРЫ ЗДЕСЬ АВТОРЫ ЗДЕСЬ АВТОРЫ ЗДЕСЬ АВТОРЫ ЗДЕСЬ АВТОРЫ ЗДЕСЬ АВТОРЫ ЗДЕСЬ АВТОРЫ ЗДЕСЬ АВТОРЫ ЗДЕСЬ АВТОРЫ 
         
@@ -91,16 +98,21 @@ async function displayBooks() {
             `<div class="selectAuthor" id="selectAuthor" >${author}</div>`
         ).join('')
 
-        let selectAuthors = document.querySelectorAll('#selectAuthor') // сравнение автора из списка и автора из карточки
+        let selectAuthors = document.querySelectorAll('#selectAuthor');
         selectAuthors.forEach(selectAuthor => {
             selectAuthor.addEventListener('click', function() {
-                if (selectAuthor.textContent === book.author) {
-                    showCard(card)
-                } else if (selectAuthor.textContent != book.author) {
-                    hideCard(card)
-                }
-            })
-        })
+                let selectedAuthor = this.textContent; //записывает автора на которого кликнули в переменную
+                
+                
+                allCards.forEach(card => {
+                    if (card.dataset.author === selectedAuthor) {
+                        showCard(card);
+                    } else {
+                        hideCard(card);
+                    }
+                });
+            });
+        });
         
     });
 }
