@@ -17,7 +17,7 @@ body {
     padding: 5px;
 }
 
-.choiceContainer {
+.containerForBookSelecting {
     display: flex;
     gap: 7px;
     background-color: rgb(197, 197, 255);
@@ -46,7 +46,7 @@ body {
     background-color: rgb(239, 244, 252);
 }
 
-.choiceContainer2 {
+.containerForGenreSelecting {
     display: flex;
     gap: 7px;
 }
@@ -60,7 +60,7 @@ body {
     cursor: pointer;
 }
 
-.selectList {
+.listOfGenres {
     position: absolute;
     top: 100%;
     left: 0;
@@ -72,7 +72,7 @@ body {
     display: none;
 }
 
-.selectList.show {
+.listOfGenres.show {
     display: block;
     border-radius: 20px;
 }
@@ -88,7 +88,7 @@ body {
 }
 
 /*инпут и кнопка*/
-.choiceContainer3 {
+.containerForAddingBooks {
     display: flex;
     gap: 7px;
 }

@@ -7,27 +7,27 @@ document.addEventListener('click', (e) => {
     if (e.target.classList.contains('selectHeader')) {
         const list = e.target.nextElementSibling;
         
-        document.querySelectorAll('.selectList').forEach(otherList => {
+        document.querySelectorAll('.listOfGenres').forEach(otherList => {
             if (otherList !== list) otherList.classList.remove('show');
         });
 
         list.classList.toggle('show');
     } else if (e.target.classList.contains('selectOption')) {
         const header = e.target.closest('.choiceItem').querySelector('.selectHeader');
-        const list = e.target.closest('.selectList');
+        const list = e.target.closest('.listOfGenres');
         
         header.textContent = e.target.textContent;
         list.classList.remove('show');
     } else {
-        document.querySelectorAll('.selectList').forEach(list => {
+        document.querySelectorAll('.listOfGenres').forEach(list => {
             list.classList.remove('show');
         });
     }
 });
 
-let selectList = document.getElementById('selectList');
+let listOfGenres = document.getElementById('listOfGenres');
 
-selectList.innerHTML = Object.entries(genres).map(([id, name]) => //список жанров в select
+listOfGenres.innerHTML = Object.entries(genres).map(([id, name]) => //список жанров в select
     `<div class="selectOption" id="selectOption" value="${id}">${name}</div>`
 ).join('');
 
@@ -58,9 +58,9 @@ async function displayBooks() {
 
             <div class="bookContent">
                 <h3 class="bookTitle">${book.title}</h3>
-                ${`<p class="bookAuthor">Автор: ${book.author}</p>`}
-                ${`<p class="bookGenre">Жанр: ${genres[book.genre_id]}</p>`}
-                ${`<p class="bookDescription">Описание: ${book.description}</p>`}
+                <p class="bookAuthor">Автор: ${book.author}</p>
+                <p class="bookGenre">Жанр: ${genres[book.genre_id]}</p>
+                <p class="bookDescription">Описание: ${book.description}</p>
             </div>
         `;
         sectionOfBooks.appendChild(card);
