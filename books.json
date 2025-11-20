@@ -58,7 +58,7 @@
   {
     "id": 8,
     "title": "Пандемониум. Город тёмных секретов",
-    "author": "Стивен Кинг",
+    "author": "Гаглоев Евгений",
     "description": "ffff",
     "genre_id": 1,
     "cover": "./pictures/fantasy/Пандемониум_город.png"
@@ -66,7 +66,7 @@
   {
     "id": 9,
     "title": "Пандемониум. Верховная Мать Змей",
-    "author": "Стивен Кинг",
+    "author": "Гаглоев Евгений",
     "description": "ffff",
     "genre_id": 1,
     "cover": "./pictures/fantasy/Пандемониум_верховная.jpg"
@@ -74,7 +74,7 @@
   {
     "id": 10,
     "title": "Пандемониум. Кодекс вещих сестёр",
-    "author": "Стивен Кинг",
+    "author": "Гаглоев Евгений",
     "description": "ffff",
     "genre_id": 1,
     "cover": "./pictures/fantasy/Пандемониум_кодекс.jpg"
@@ -82,7 +82,7 @@
   {
     "id": 11,
     "title": "Пандемониум. Букет увядших орхидей",
-    "author": "Стивен Кинг",
+    "author": "Гаглоев Евгений",
     "description": "ffff",
     "genre_id": 1,
     "cover": "./pictures/fantasy/Пандемониум_букет.jpg"
@@ -90,7 +90,7 @@
   {
     "id": 12,
     "title": "Пандемониум. Ларец, полный тьмы",
-    "author": "Стивен Кинг",
+    "author": "Гаглоев Евгений",
     "description": "ffff",
     "genre_id": 1,
     "cover": "./pictures/fantasy/Пандемониум_ларец.jpg"
@@ -98,7 +98,7 @@
   {
     "id": 13,
     "title": "Пандемониум. Силуэт в разбитом зеркале",
-    "author": "Стивен Кинг",
+    "author": "Гаглоев Евгений",
     "description": "ffff",
     "genre_id": 1,
     "cover": "./pictures/fantasy/Пандемониум_силуэт.png"
@@ -106,7 +106,7 @@
   {
     "id": 14,
     "title": "Пандемониум. Время тёмных охотников",
-    "author": "Стивен Кинг",
+    "author": "Гаглоев Евгений",
     "description": "ffff",
     "genre_id": 1,
     "cover": "./pictures/fantasy/Пандемониум_время.jpg"
@@ -114,7 +114,7 @@
   {
     "id": 15,
     "title": "Пандемониум. Дом у Змеиного озера",
-    "author": "Стивен Кинг",
+    "author": "Гаглоев Евгений",
     "description": "ffff",
     "genre_id": 1,
     "cover": "./pictures/fantasy/Пандемониум_дом.jpg"
@@ -122,7 +122,7 @@
   {
     "id": 16,
     "title": "Пандемониум. Восход багровой ночи",
-    "author": "Стивен Кинг",
+    "author": "Гаглоев Евгений",
     "description": "ffff",
     "genre_id": 1,
     "cover": "./pictures/fantasy/Пандемониум_восход.jpg"
@@ -130,7 +130,7 @@
   {
     "id": 17,
     "title": "Пандемониум. Герои забытых легенд",
-    "author": "Стивен Кинг",
+    "author": "Гаглоев Евгений",
     "description": "ffff",
     "genre_id": 1,
     "cover": "./pictures/fantasy/Пандемониум_герои.png"
@@ -138,7 +138,7 @@
   {
     "id": 18,
     "title": "Пандемониум. Галерея кукол и костей",
-    "author": "Стивен Кинг",
+    "author": "Гаглоев Евгений",
     "description": "ffff",
     "genre_id": 1,
     "cover": "./pictures/fantasy/Пандемониум_галерея.webp"
@@ -146,7 +146,7 @@
   {
     "id": 19,
     "title": "Пандемониум. Орден огненного дракона",
-    "author": "Стивен Кинг",
+    "author": "Гаглоев Евгений",
     "description": "ffff",
     "genre_id": 1,
     "cover": "./pictures/fantasy/Пандемониум_орден.webp"
@@ -154,7 +154,7 @@
   {
     "id": 20,
     "title": "Пандемониум. Тьма в твоих глазах",
-    "author": "Стивен Кинг",
+    "author": "Гаглоев Евгений",
     "description": "ffff",
     "genre_id": 1,
     "cover": "./pictures/fantasy/Пандемониум_тьма.webp"
@@ -162,7 +162,7 @@
   {
     "id": 21,
     "title": "Оно",
-    "author": "Кинг",
+    "author": "Стивен Кинг",
     "description": "",
     "genre_id": 5,
     "cover": "./pictures/ужасы/оно.png"

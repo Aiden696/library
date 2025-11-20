@@ -5,30 +5,34 @@ let genres = await getAllGenres()
 //кастомизация select
 document.addEventListener('click', (e) => {
     if (e.target.classList.contains('selectHeader')) {
-        const list = e.target.nextElementSibling;
+        let list = e.target.nextElementSibling;
         
-        document.querySelectorAll('.listOfGenres').forEach(otherList => {
+        // Закрываем все открытые списки (и жанров, и авторов)
+        document.querySelectorAll('.listOfGenres, .listOfAuthors').forEach(otherList => {
             if (otherList !== list) otherList.classList.remove('show');
         });
 
         list.classList.toggle('show');
     } else if (e.target.classList.contains('selectOption')) {
-        const header = e.target.closest('.choiceItem').querySelector('.selectHeader');
-        const list = e.target.closest('.listOfGenres');
+        let choiceItem = e.target.closest('.choiceItem');
+        let header = choiceItem.querySelector('.selectHeader');
+        let list = choiceItem.querySelector('.listOfGenres, .listOfAuthors');
         
         header.textContent = e.target.textContent;
         list.classList.remove('show');
     } else {
-        document.querySelectorAll('.listOfGenres').forEach(list => {
+        // Закрываем все списки при клике вне элементов
+        document.querySelectorAll('.listOfGenres, .listOfAuthors').forEach(list => {
             list.classList.remove('show');
         });
     }
 });
 
 let listOfGenres = document.getElementById('listOfGenres');
+let listOfAuthors = document.getElementById('listOfAuthors');
 
 listOfGenres.innerHTML = Object.entries(genres).map(([id, name]) => //список жанров в select
-    `<div class="selectOption" id="selectOption" value="${id}">${name}</div>`
+    `<div class="selectGenre" id="selectGenre" value="${id}">${name}</div>`
 ).join('');
 
 function showCard(card) {
@@ -44,7 +48,7 @@ function hideCard(card) {
 
 async function displayBooks() {
     let books = await getAllBooks();
-    
+    let arrOfAuthors = [];
     let sectionOfBooks = document.getElementById('cards');
 
     books.forEach(book => {
@@ -65,18 +69,39 @@ async function displayBooks() {
         `;
         sectionOfBooks.appendChild(card);
 
-        
-        let selectsOption = document.querySelectorAll('#selectOption') // сравнение жанра из списка и жанра из карточки
-        selectsOption.forEach(selectOption => {
-            //console.log(selectOption.textContent)
-            selectOption.addEventListener('click', function() {
-                if (selectOption.textContent === genres[book.genre_id]) {
+        let selectGenres = document.querySelectorAll('#selectGenre') // сравнение жанра из списка и жанра из карточки
+        selectGenres.forEach(selectGenre => {
+            selectGenre.addEventListener('click', function() {
+                if (selectGenre.textContent === genres[book.genre_id]) {
                     showCard(card)
-                } else if (selectOption.textContent != genres[book.genre_id]) {
+                } else if (selectGenre.textContent != genres[book.genre_id]) {
                     hideCard(card)
                 }
             })
         })
+        
+        
+        // ЗДЕСЬ АВТОРЫ ЗДЕСЬ АВТОРЫ ЗДЕСЬ АВТОРЫ ЗДЕСЬ АВТОРЫ ЗДЕСЬ АВТОРЫ ЗДЕСЬ АВТОРЫ ЗДЕСЬ АВТОРЫ ЗДЕСЬ АВТОРЫ ЗДЕСЬ АВТОРЫ ЗДЕСЬ АВТОРЫ ЗДЕСЬ АВТОРЫ ЗДЕСЬ АВТОРЫ ЗДЕСЬ АВТОРЫ ЗДЕСЬ АВТОРЫ 
+        
+        if (!arrOfAuthors.includes(book.author)) { //проверка на дублирование автора в массиве
+            arrOfAuthors.push(book.author);
+        }
+        
+        listOfAuthors.innerHTML = arrOfAuthors.map(author => //добавление автора в select
+            `<div class="selectAuthor" id="selectAuthor" >${author}</div>`
+        ).join('')
+
+        let selectAuthors = document.querySelectorAll('#selectAuthor') // сравнение автора из списка и автора из карточки
+        selectAuthors.forEach(selectAuthor => {
+            selectAuthor.addEventListener('click', function() {
+                if (selectAuthor.textContent === book.author) {
+                    showCard(card)
+                } else if (selectAuthor.textContent != book.author) {
+                    hideCard(card)
+                }
+            })
+        })
+        
     });
 }
 
