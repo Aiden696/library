@@ -1,0 +1,13 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "firefox",
+            "request": "launch",
+            "name": "Запустить Firefox на localhost",
+            "url": "http://localhost:5500",
+            "webRoot": "${workspaceFolder}",
+            "firefoxArgs": ["-start-debugger-server", "5500"]
+        }
+    ]
+}
