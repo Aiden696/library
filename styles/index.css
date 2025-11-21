@@ -17,10 +17,10 @@ body {
     padding: 5px;
 }
 
-.choiceContainer {
+.containerForBookSelecting {
     display: flex;
     gap: 7px;
-    background-color: rgb(197, 197, 255);
+    background-color: rgb(176, 209, 249);
     padding: 3px;
     border-radius: 20px;
 }
@@ -35,7 +35,7 @@ body {
 }
 
 .choiceText {
-    background-color: rgb(197, 197, 255);
+    background-color: rgb(176, 209, 249);
     display: block;
     padding: 5px;
     text-align: center;
@@ -46,7 +46,7 @@ body {
     background-color: rgb(239, 244, 252);
 }
 
-.choiceContainer2 {
+.containerForGenreSelecting {
     display: flex;
     gap: 7px;
 }
@@ -54,13 +54,13 @@ body {
 /*кастомизация select*/
 .selectHeader {
     background: rgb(239, 244, 252);
-    border: 3px solid rgb(197, 197, 255);
+    border: 3px solid rgb(176, 209, 249);
     padding: 7px;
     border-radius: 18px;
     cursor: pointer;
 }
 
-.selectList {
+.listOfGenres, .listOfAuthors {
     position: absolute;
     top: 100%;
     left: 0;
@@ -72,23 +72,23 @@ body {
     display: none;
 }
 
-.selectList.show {
+.listOfGenres.show, .listOfAuthors.show {
     display: block;
     border-radius: 20px;
 }
 
-.selectOption {
+.selectGenre, .selectAuthor, .showAllBooks {
     padding: 10px;
     cursor: pointer;
     border-radius: 15px;
 }
 
-.selectOption:hover {
-    background: rgb(197, 197, 255);
+.selectGenre:hover, .selectAuthor:hover, .showAllBooks:hover {
+    background: rgb(176, 209, 249);
 }
 
 /*инпут и кнопка*/
-.choiceContainer3 {
+.containerForAddingBooks {
     display: flex;
     gap: 7px;
 }
@@ -96,7 +96,7 @@ body {
 .enterBook {
     background: rgb(239, 244, 252);
     width: 80%;
-    border: 3px solid rgb(197, 197, 255);
+    border: 3px solid rgb(176, 209, 249);
     border-radius: 15px;
     padding: 7px;
 }
@@ -113,13 +113,13 @@ body {
 }
 
 .cardsOfBooks {
-    background-color: rgb(197, 197, 255);
+    background-color: rgb(176, 209, 249);
     flex: 1;
 }
 
 .cards {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(8, 1fr);
     gap: 5px;
     margin: 5px;
 }
@@ -142,7 +142,7 @@ body {
 .bookPicture {
   overflow: hidden; /*обрезает выходящие за границы элементы*/
   width: 100%;
-  height: 340px;
+  height: 380px;
   border-radius: 15px;
 }
 
