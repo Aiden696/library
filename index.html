@@ -38,7 +38,11 @@
 
             <section class="containerForAddingBooks">
                 <input class="enterBook" placeholder="найти книгу...">
-                <button class="addBook">+ Добавить книгу</button>
+                <button id="addBook" class="addBook">+ Добавить книгу</button>
+                <dialog id="modalDialog">
+                    <button class="closeButton">×</button>
+                    <div id="modalContent"></div>
+                </dialog>
             </section>
         </header>
         <main id="cardsOfBooks" class="cardsOfBooks">

@@ -158,3 +158,155 @@ body {
     overflow-y: auto;
     height: 200px;
 }
+
+/*диалог*/
+dialog {
+    position:fixed;
+    width: 460px;
+    height: fit-content;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: auto; /* Включаем прокрутку */
+    scrollbar-width: none; /* Скрываем скроллбар в Firefox */
+    -ms-overflow-style: none; /* Скрываем скроллбар в IE и Edge */
+    border: none; /* Убираем стандартную рамку */
+    border-radius: 15px; /* Скругление углов */
+    background: #fff; /* Белый фон */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Тень */
+    padding: 0;
+  }
+  
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+.bookDialog {
+    background: rgb(206, 228, 255);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/*cover*/
+.coverImage {
+    width: 200px;
+    height: 250px;
+}
+
+/* Скрываем стандартный input */
+#cover {
+    display: none;
+}
+
+/* Создаем кастомную кнопку */
+.customButtonForPicture {
+    display: inline-block;
+    padding: 12px 24px;
+    background: #007bff;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: center;
+    border: none;
+    font-size: 16px;
+}
+
+.customButtonForPicture:hover {
+    background: #0056b3;
+}
+
+/* Показываем имя выбранного файла */
+.fileName {
+    margin-left: 10px;
+    color: #666;
+    font-style: italic;
+}
+
+.form h2 {
+    text-align: center;
+    color: black;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.formSection {
+    margin-bottom: 10px;
+}
+
+.formSection label {
+    display: block;
+    margin-bottom: 5px;
+    color: black;
+    font-weight: 500;
+}
+
+.formSection input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.formSection input:focus {
+    outline: none;
+    border-color: rgb(96, 96, 201);
+}
+
+.formSection input.success {
+    border-color: #28a745;
+}
+
+.formSection input.error {
+    border-color: #dc3545;
+}
+
+.submitBatton {
+    width: 100%;
+    padding: 12px;
+    background-color: rgb(176, 209, 249);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    color: black;
+}
+
+.submitBatton:hover {
+    box-sizing: border-box;
+    outline: 2px solid rgb(96, 96, 201);
+}
+
+.submitBatton:disabled {
+    background: #cfcfcf;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.successMessage {
+    background: #d4edda;
+    color: #155724;
+    padding: 12px;
+    border-radius: 5px;
+    margin-top: 20px;
+    text-align: center;
+    display: none;
+}
+
+.closeButton {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 4;
+}
+
