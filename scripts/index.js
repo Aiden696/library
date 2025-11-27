@@ -1,6 +1,7 @@
 import { getAllBooks, getAllGenres } from "./db.js";
 
 let genres = await getAllGenres()
+let books = await getAllBooks();
 
 //кастомизация select
 document.addEventListener('click', (e) => {
@@ -27,7 +28,7 @@ document.addEventListener('click', (e) => {
 
 let listOfGenres = document.getElementById('listOfGenres');
 let listOfAuthors = document.getElementById('listOfAuthors');
-let addBook = document.getElementById('addBook');
+let btnAddBook = document.getElementById('addBook');
 let dialog = document.getElementById('modalDialog')
 let modalContent = document.getElementById('modalContent')
 
@@ -45,7 +46,8 @@ function hideCard(card) {
     card.classList.add('hidden')
 }
 
-addBook.addEventListener('click', function() { // ф-ция добавления книги через форму
+// ФОРМА
+btnAddBook.addEventListener('click', function() { // ф-ция добавления книги через форму
     let section = document.createElement('section');
     section.classList.add('bookDialog')
     section.innerHTML = `
@@ -74,7 +76,21 @@ addBook.addEventListener('click', function() { // ф-ция добавления
 
                 <div class="formSection">
                     <label for="genre">Жанр:</label>
-                    <input id="genre" type="text" name="genre" required>
+                    <select id="genre" name="genre" required>
+                        <option value="1">Фэнтези</option>
+                        <option value="2">Фантастика</option>
+                        <option value="3">Любовный роман</option>
+                        <option value="4">Детективы</option>
+                        <option value="5">Ужасы</option>
+                        <option value="6">Проза</option>
+                        <option value="7">Научпоп</option>
+                        <option value="8">Научная фантастика</option>
+                        <option value="9">Программирование</option>
+                        <option value="10">Психология</option>
+                        <option value="11">Детская литература</option>
+                        <option value="12">Young Adult</option>
+                        <option value="13">True Crime</option>
+                    </select>
                     <span id="genreError" class="errorMessage"></span>
                 </div>
 
@@ -84,7 +100,7 @@ addBook.addEventListener('click', function() { // ф-ция добавления
                     <span id="descriptionError" class="errorMessage"></span>
                 </div>
 
-                <button type="submit" class="submitBatton" id="buttonSend">Добавить книгу</button>
+                <button type="submit" class="submitBatton" id="buttonSend"">Добавить книгу</button>
                 <div id="successMessage" class="successMessage"></div>
             </form>
     `
@@ -93,7 +109,7 @@ addBook.addEventListener('click', function() { // ф-ция добавления
     showImageForBook()
 })
 
-function showImageForBook() {
+function showImageForBook() { //ф-ция для показа изображения в форме
     let coverInput = document.getElementById('cover');
     let imageForCover = document.getElementById('imageForCover');
 
@@ -111,47 +127,94 @@ function showImageForBook() {
     });
 
     coverInput.addEventListener('change', function(e) { // для отображения выбранной обложки
-    let fileName = document.getElementById('fileName');
-    if (this.files[0]) {
-        fileName.textContent = this.files[0].name;
-    } else {
-        fileName.textContent = 'Файл не выбран';
-    }
-});
+        let fileName = document.getElementById('fileName');
+        if (this.files[0]) {
+            fileName.textContent = this.files[0].name;
+        } else {
+            fileName.textContent = 'Файл не выбран';
+        }
+    });
 }
 
-document.addEventListener('click', function(e) {
+async function getImageAsBase64(file) { //преобразует файл в base64 строку
+    if (!file) return ''; // если файл не выбран
+    
+    return new Promise((resolve) => {
+        let reader = new FileReader();
+        reader.onload = (e) => resolve(e.target.result);
+        reader.readAsDataURL(file);
+    });
+}
+
+document.addEventListener('click', function(e) { //закрытие модал окна по крестику
     if (e.target.classList.contains('closeButton')) {
         closeDialog();
     }
 });
 
-// Закрытие по ESC и клику вне окна
-dialog.addEventListener('click', function(e) {
+dialog.addEventListener('click', function(e) { //закрытие модал окна по ESC и клику вне окна
     if (e.target === dialog) {
         closeDialog();
     }
 });
 
-
 function closeDialog() {
-  let dialog = document.getElementById('modalDialog');
-  if (dialog) {
+    let dialog = document.getElementById('modalDialog');
     dialog.close();
     modalContent.innerHTML = '';
-  }
 }
 
+document.addEventListener('click', async function(e) {
+    if (e.target.id === 'buttonSend') {
+        e.preventDefault()
+        let titleInput = document.getElementById('title');
+        let authorInput = document.getElementById('author');
+        let genreInput = document.getElementById('genre');
+        let descriptionInput = document.getElementById('description');
+        let coverInput = document.getElementById('cover')
 
+        let lastId = 0; // берем id последней книги из books.json
+        books.forEach(book => {
+            lastId = book.id;
+        })
+
+        let cardsInLS = JSON.parse(localStorage.getItem('allBooks')) || [];
+
+        cardsInLS.forEach(book => {
+            lastId = book.id;
+        })
+
+        let newBook = {
+            id: lastId + 1,
+            title: titleInput.value.trim(),
+            author: authorInput.value.trim(),
+            description: descriptionInput.value.trim(),
+            genre_id: Number(genreInput.value),
+            cover: await getImageAsBase64(coverInput.files[0])
+        }
+
+        cardsInLS.push(newBook)
+
+        localStorage.setItem('allBooks', JSON.stringify(cardsInLS))
+        console.log(newBook)
+        closeDialog();
+
+        books = await getAllBooks();
+        let cards = document.getElementById('cards');
+        cards.innerHTML = '';
+        displayBooks()
+    }
+})
+
+// КНИГИ
 async function displayBooks() {
-    let books = await getAllBooks();
     let arrOfAuthors = [];
     let sectionOfBooks = document.getElementById('cards');
 
     books.forEach(book => {
         let card = document.createElement('div');
         card.className = 'cardOfBook';
-        card.dataset.author = book.author; //с помощью dataset каждой карточке приписывает автора
+        card.dataset.author = book.author;
         card.dataset.genre = book.genre_id;
         card.innerHTML = `
             <div class="bookPicture">
@@ -201,7 +264,7 @@ async function displayBooks() {
         })
     })
 
-    let selectAuthors = document.querySelectorAll('.selectAuthor');
+    let selectAuthors = document.querySelectorAll('.selectAuthor'); //
     selectAuthors.forEach(selectAuthor => {
         selectAuthor.addEventListener('click', function() {
             let selectedAuthor = this.textContent; //записывает автора на которого кликнули в переменную
