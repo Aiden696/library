@@ -39,7 +39,7 @@ export async function getAllBooks() { //взять книги из localStorage
 }
 
 getAllBooks().then(books => { //then ждет пока книги загрузятся из getAllBooks()
-    console.log('Все книги из localStorage:', books);
+    //console.log('Все книги из localStorage:', books);
 });
 
 async function addGenresFromJson() { //добавить книги из json в localStorage

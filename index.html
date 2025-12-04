@@ -41,7 +41,51 @@
                 <button id="addBook" class="addBook">+ Добавить книгу</button>
                 <dialog id="modalDialog">
                     <button class="closeButton">×</button>
-                    <div id="modalContent"></div>
+                    <div id="modalContent">
+                        <section class="bookDialog">
+                            <form id="addBookForm" class="form">
+                                <h2>Добавить книгу</h2>
+
+                                <div class="formSection">
+                                    <label for="cover">Добавьте обложку для книги:</label>
+                                    <label for="cover" class="customButtonForPicture"> Выберите файл </label>
+                                    <span class="fileName" id="fileName">Файл не выбран</span>
+                                    <input id="cover" type="file" name="cover" accept="image/*">
+                                    <div id="imageForCover" class="imageForCover"></div>
+                                </div>
+
+                                <div class="formSection">
+                                    <label for="title">Название:</label>
+                                    <input id="title" type="text" name="title" required>
+                                    <span id="titleError" class="errorMessage"></span>
+                                </div>
+
+                                <div class="formSection">
+                                    <label for="author">Автор:</label>
+                                    <input id="author" type="text" name="author" required>
+                                    <span id="authorError" class="errorMessage"></span>
+                                </div>
+
+                                <div class="formSection">
+                                    <label for="genre">Жанр:</label>
+                                    <div class="sectionWithGenre">
+                                        <select id="genre" name="genre" required></select>
+                                        <input id="inputForGenreInForm">
+                                    </div>
+                                    <span id="genreError" class="errorMessage"></span>
+                                </div>
+
+                                <div class="formSection">
+                                    <label for="description">Описание:</label>
+                                    <input id="description" type="text" name="description" required>
+                                    <span id="descriptionError" class="errorMessage"></span>
+                                </div>
+
+                                <button type="submit" class="submitBatton" id="buttonSend">Добавить книгу</button>
+                                <div id="successMessage" class="successMessage"></div>
+                            </form>
+                        </section>
+                    </div>
                 </dialog>
             </section>
         </header>

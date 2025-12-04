@@ -310,3 +310,8 @@ dialog::backdrop {
     z-index: 4;
 }
 
+.sectionWithGenre {
+    display: flex;
+    gap: 3px;
+}
+
