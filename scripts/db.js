@@ -69,25 +69,63 @@ export async function getAllGenres() { //взять книги из localStorage
     return []
 }
 
-function addBook(book) {
+export function addBook(book) {
     let elementsOfBooks = ['title', 'author', 'description', 'genre_id', 'cover'];
     
     for (let element of elementsOfBooks) {
-        if (!Object.keys(book).includes(element)) {
+        if (!(element in book)) {
             console.log(`Отсутствует: ${element}`)
             return false;
         }
     };
+
+    //title
     
     if (typeof book.title !== 'string') { //typeof оператор, который возвращает строку указывающую тип операнда
         console.log('title должен быть строкой');
         return false;
     }
+
+    let title = book.title.trim();
         
-    if (book.title.length === 0) {
+    if (title.length === 0) {
         console.log('title не может быть пустым');
         return false;
     }
+
+    //author
+
+    if (typeof book.author !== 'string') {
+        console.log('author должен быть строкой');
+        return false;
+    }
+
+    let author = book.author.trim();
+
+    if (author.length === 0) {
+        console.log('author не может быть пустым');
+        return false;
+    }
+
+    //description
+
+    if (typeof book.description !== 'string') {
+        console.log('description должен быть строкой');
+        return false;
+    }
+
+    let description = book.description.trim();
+
+    if (description.length === 0) {
+        console.log('description не может быть пустым');
+        return false;
+    }
+
+    if (description.length < 10) {
+        console.log('description не может менее 10 символов');
+        return false;
+    }
+
     return true;
 }
 

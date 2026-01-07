@@ -1,11 +1,13 @@
-import { getAllBooks, getAllGenres } from "./db.js";
+import { getAllBooks, getAllGenres, addBook} from "./db.js";
 
-//let genres = await getAllGenres()
+//let genres = await getAllGenres() let allCards = document.querySelectorAll('.cardOfBook');
 
 let jsonGenres = await getAllGenres();
 let localStorageGenres = JSON.parse(localStorage.getItem('allGenres')) || {};
 let genres = { ...jsonGenres, ...localStorageGenres };
 let books = await getAllBooks();
+
+console.log(genres)
 
 //кастомизация select
 document.addEventListener('click', (e) => {
@@ -36,12 +38,12 @@ let btnAddBook = document.getElementById('addBook');
 let dialog = document.getElementById('modalDialog')
 let buttonSend = document.getElementById('buttonSend');
 
-console.log(listOfGenres)
+//console.log(listOfGenres)
 
 listOfGenres.innerHTML = `<div class="showAllBooks">Показать все жанры</div>` + Object.values(genres).map(name => //список жанров в select
     `<div class="selectGenre">${name}</div>`
 ).join('');
-console.log(listOfGenres.innerHTML)
+//console.log(listOfGenres.innerHTML)
 
 function showCard(card) {
     card.classList.remove('hidden');
@@ -153,7 +155,7 @@ buttonSend.addEventListener('click', async function(e) {
     let newGenreId = lastGenreId + 1; //новый ID
     
     genres[newGenreId] = genreInput.value.trim();       
-    localStorage.setItem('allGenres', JSON.stringify(genres)); 
+    localStorage.setItem('allGenres', JSON.stringify(genres));
     
     let newOption = document.createElement('option');
     newOption.value = newGenreId;
@@ -184,10 +186,14 @@ buttonSend.addEventListener('click', async function(e) {
         cover: await getImageAsBase64(coverInput.files[0])
     }
 
+    if (!addBook(newBook)) {
+        console.log('книга не прошла проверку')
+        return
+    }
+
     cardsInLS.push(newBook)
 
     localStorage.setItem('allBooks', JSON.stringify(cardsInLS))
-    console.log(newBook)
     closeDialog();
 
     books = await getAllBooks();
@@ -198,7 +204,49 @@ buttonSend.addEventListener('click', async function(e) {
     allCards = document.querySelectorAll('.cardOfBook'); //находит все карточки
 
     // ПЕРЕЗАПИСЬ 
+    filterHandler()
+})
 
+// КНИГИ
+async function displayBooks() {
+    let arrOfAuthors = [];
+    let sectionOfBooks = document.getElementById('cards');
+
+    books.forEach(book => {
+        let card = document.createElement('div');
+        card.className = 'cardOfBook';
+        card.author = book.author;
+        card.genre = book.genre_id;
+        card.innerHTML = `
+            <div class="bookPicture">
+                <img src="${book.cover}" alt="${book.title}" class="bookCover">
+            </div>
+
+            <div class="bookContent">
+                <h3 class="bookTitle">${book.title}</h3>
+                <p class="bookAuthor">Автор: ${book.author}</p>
+                <p class="bookGenre">Жанр: ${genres[book.genre_id]}</p>
+                <p class="bookDescription">Описание: ${book.description}</p>
+            </div>
+        `;
+        sectionOfBooks.appendChild(card);
+
+        if (!arrOfAuthors.includes(book.author)) { //проверка на дублирование автора в массиве
+            arrOfAuthors.push(book.author);
+        }
+    });
+
+    listOfAuthors.innerHTML = `<div class="showAllBooks">Показать всех авторов</div>` + arrOfAuthors.map(author => //добавление автора в select
+        `<div class="selectAuthor">${author}</div>`
+    ).join('')
+}
+
+displayBooks();
+
+let allCards = document.querySelectorAll('.cardOfBook'); //находит все карточки
+
+function filterHandler() {
+    
     let buttonsShowAllBooks = document.querySelectorAll('.showAllBooks');
     buttonsShowAllBooks.forEach(buttonShowAllBooks => {
         buttonShowAllBooks.addEventListener('click', function() {
@@ -235,80 +283,6 @@ buttonSend.addEventListener('click', async function(e) {
             });
         });
     });
-})
-
-// КНИГИ
-async function displayBooks() {
-    let arrOfAuthors = [];
-    let sectionOfBooks = document.getElementById('cards');
-
-    books.forEach(book => {
-        let card = document.createElement('div');
-        card.className = 'cardOfBook';
-        card.author = book.author;
-        card.genre = book.genre_id;
-        card.innerHTML = `
-            <div class="bookPicture">
-                <img src="${book.cover}" alt="${book.title}" class="bookCover">
-            </div>
-
-            <div class="bookContent">
-                <h3 class="bookTitle">${book.title}</h3>
-                <p class="bookAuthor">Автор: ${book.author}</p>
-                <p class="bookGenre">Жанр: ${genres[book.genre_id]}</p>
-                <p class="bookDescription">Описание: ${book.description}</p>
-            </div>
-        `;
-        sectionOfBooks.appendChild(card);
-
-        if (!arrOfAuthors.includes(book.author)) { //проверка на дублирование автора в массиве
-            arrOfAuthors.push(book.author);
-        }
-    });
-
-    listOfAuthors.innerHTML = `<div class="showAllBooks">Показать всех авторов</div>` + arrOfAuthors.map(author => //добавление автора в select
-        `<div class="selectAuthor">${author}</div>`
-    ).join('')
-
-    let buttonsShowAllBooks = document.querySelectorAll('.showAllBooks');
-    buttonsShowAllBooks.forEach(buttonShowAllBooks => {
-        buttonShowAllBooks.addEventListener('click', function() {
-            allCards.forEach(card => {
-                showCard(card);
-            })
-        })
-    })
 }
 
-displayBooks();
-
-let allCards = document.querySelectorAll('.cardOfBook'); //находит все карточки
-
-
-let selectGenres = document.querySelectorAll('.selectGenre') // сравнение жанра из списка и жанра из карточки
-selectGenres.forEach(selectGenre => {
-    selectGenre.addEventListener('click', function() {
-        let selectGenres = this.textContent;
-        allCards.forEach(card => {
-            if (genres[card.genre] === selectGenres) {
-                showCard(card)
-            } else {
-                hideCard(card)
-            }
-        })
-    })
-})
-
-let selectAuthors = document.querySelectorAll('.selectAuthor'); //
-selectAuthors.forEach(selectAuthor => {
-    selectAuthor.addEventListener('click', function() {
-        let selectedAuthor = this.textContent; //записывает автора на которого кликнули в переменную
-        allCards.forEach(card => {
-            if (card.author === selectedAuthor) {
-                showCard(card);
-            } else {
-                hideCard(card);
-            }
-        });
-    });
-});    
+filterHandler()
